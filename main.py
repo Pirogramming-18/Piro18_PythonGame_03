@@ -98,22 +98,28 @@ for i in range(int(friendNumber)):
 # print(friendList, playerList, playerLimit, loseCount) # 임시 확인용
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
+
+# 지금까지의 정보를 클래스에 인수로 넣어줘서 drinkingGame의 객체 생성
 drinkGame = drinkingGame(playerList, playerLimit, loseCount)
 
+# userName이 게임 선택하면서 시작
 drinkGame.printLimit()
 printGameList()
 drinkGame.selectGame(userName)
+
+
 while True:
+
   drinkGame.printLimit()
   printGameList()
   keepGoing = input('술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 "exit"를, 계속하고 싶으면 아무키나 입력해주세요! :')
   if keepGoing == 'exit':
     print(f"{userName}님이 게임을 종료하셨습니다.")
     break
-  drinkGame.selectGame(drinkGame.lastLoser)
-  drinkGame.changeStatus()
-  print(drinkGame.playerLimit)
-  if 0 in drinkGame.playerLimit:
+  drinkGame.selectGame(drinkGame.lastLoser)  #마지막으로 진 사람이 게임 선택
+  drinkGame.changeStatus()       # 치사량 및 진 횟수 업데이트
+  print(drinkGame.playerLimit)   # 치사량 및 진 횟수 출력
+  if 0 in drinkGame.playerLimit: # 게임이 끝난 경우
     drinkGame.printGameOver()
     break
     

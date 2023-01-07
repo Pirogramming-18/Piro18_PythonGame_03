@@ -1,4 +1,22 @@
 
+# ----------------함수 설명-----------------
+# interface_function.py 구성 요소
+# 1. drinkingGame 클래스 
+#  - 변수
+#      1. lastLoser      (각 게임에서 진 사람을 해당 변수에 담음. 그 다음 게임을 선택할 사람을 정하기 위함)
+#      2. playerList     (게임에 참가하는 플레이어들의 이름 리스트)
+#      3. playerLimit    (각 게임에 참가하는 플레이어들의 치사량 리스트 순서는 위의 이름 리스트 순서대로)
+#      4. loseCount      (게임 끝날 때마다 진 횟수 출력해야해서 추가. 플레이어들의 진 횟수. 순서는 위와 동일)
+#  - 함수
+#      1. selectGame     (마지막에 진 사람이 게임을 선택하게 함 input으로 받는 숫자에 따라 게임 결정)
+#      2. printLimit     (각 플레이어마다 진 횟수와 남은 치사량 출력)
+#      3. changeStatus   (게임이 끝날 때마다 진 횟수와 남은 치사량 업데이트)
+#      4. printGameOver  (게임이 끝났음을 아스키아트로 출력하고 진 사람 출력)
+
+# 그 외의 함수
+# printGameList()        (게임 리스트 출력)
+# printIntro()           (게임 인트로 출력)
+# printSelectLimit()     (주량 선택 인터페이스 출력)
 
 class drinkingGame:
   
