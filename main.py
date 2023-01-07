@@ -2,6 +2,7 @@ import random
 from interface_function import drinkingGame, printGameList, printIntro, printSelectLimit
 
 
+
 playerList = []
 playerLimit = []
 
@@ -94,7 +95,7 @@ for i in range(int(friendNumber)):
   friendList.remove(friendName) # 뽑힌 친구가 다시 선택되어 중복되지 않도록 리스트에서 중복 제거
   print(f"오늘 함께 취할 친구는 {friendName}입니다! (치사량 : {LimitOfFriend})") # f-string  => 원하는 위치에 변수 넣으면서 출력 가능
   
-print(friendList, playerList, playerLimit, loseCount) # 임시 확인용
+# print(friendList, playerList, playerLimit, loseCount) # 임시 확인용
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 drinkGame = drinkingGame(playerList, playerLimit, loseCount)
@@ -102,7 +103,7 @@ drinkGame = drinkingGame(playerList, playerLimit, loseCount)
 drinkGame.printLimit()
 printGameList()
 drinkGame.selectGame(userName)
-while 0 not in playerLimit:
+while True:
   drinkGame.printLimit()
   printGameList()
   keepGoing = input('술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 "exit"를, 계속하고 싶으면 아무키나 입력해주세요! :')
@@ -111,5 +112,8 @@ while 0 not in playerLimit:
     break
   drinkGame.selectGame(drinkGame.lastLoser)
   drinkGame.changeStatus()
-  
-  
+  print(drinkGame.playerLimit)
+  if 0 in drinkGame.playerLimit:
+    drinkGame.printGameOver()
+    break
+    
