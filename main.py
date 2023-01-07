@@ -1,4 +1,7 @@
 import random
+from interface_function import printLimit, printGameList
+
+
 
 playerList = []
 playerLimit = []
@@ -55,9 +58,7 @@ while not correctLimit:
   else:
     print("1부터 5사이의 정수를 골라주세요!")
 
-playerLimit.append(int(userDrinkingLimit)) #게임참가할 유저 주량을 플레이어주량리스트에 추가
-print(playerLimit)
-print()
+playerLimit.append(friendLimit[int(userDrinkingLimit)-1]) #게임참가할 유저 주량을 플레이어주량리스트에 추가
 
 #게임할 인원 선택
 correctFriendNumber = False
@@ -73,10 +74,11 @@ while not correctFriendNumber:
   else:
     print("1부터 3사이의 정수를 골라주세요!")
 
+loseCount = [0 for _ in range(int(friendNumber)+1)]  # 남은 치사량을 출력하기 위해 진 횟수를 카운트하는 리스트 생성
+
 if userName in friendList:           # 입력받은 유저 이름이 친구들 이름과 중복될 수 있으므로
   idx = friendList.index(userName)   #중복되는 경우 userName 리스트에서 삭제 후 random하게 뽑아야함
   del friendList[idx]
-
 
 for i in range(int(friendNumber)):
   playerNameIndex = random.randint(0, len(friendList)-1)  #친구들 리스트에서 랜덤하게 인덱스 선택
@@ -91,6 +93,19 @@ for i in range(int(friendNumber)):
   friendList.remove(friendName) # 뽑힌 친구가 다시 선택되어 중복되지 않도록 리스트에서 중복 제거
   print(f"오늘 함께 취할 친구는 {friendName}입니다! (치사량 : {LimitOfFriend})") # f-string  => 원하는 위치에 변수 넣으면서 출력 가능
   
-print(friendList, playerList, playerLimit)
+print(friendList, playerList, playerLimit, loseCount) # 임시 확인용
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
+
+printLimit(playerList, playerLimit, loseCount)
+printGameList()
+
+while 0 not in playerLimit:
+  printLimit(playerList, playerLimit, loseCount)
+  printGameList()
+  keepGoing = input('술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 "exit"를, 계속하고 싶으면 아무키나 입력해주세요! :')
+  if keepGoing == 'exit':
+    print(f"{userName}님이 게임을 종료하셨습니다.")
+    break
+  
   
