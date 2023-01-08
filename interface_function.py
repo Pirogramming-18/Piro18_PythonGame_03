@@ -21,11 +21,11 @@ from random import randint
 
 class drinkingGame():
   
-  lastLoser = "태훈"  #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
+  lastLoser = ""  #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
   playerList = []
   playerLimit = []
   loseCount = []
-  userName ="태훈"
+  userName =""
   stationDict = stationDict
   def __init__(self, playerList, playerLimit, loseCount):
     self.playerList = playerList
@@ -49,7 +49,7 @@ class drinkingGame():
         elif gameNumber == "3":
           self.game3()
         elif gameNumber == "4":
-          self.game4()
+          self.subwayGame()
         elif gameNumber == "5":
           self.recordGame()
         correctNumber =True
@@ -76,7 +76,7 @@ class drinkingGame():
     print("딸기 게임입니다")
   def game3(self):
     print("UP&DOWN 게임입니다")
-  def game4(self):
+  def subwayGame(self):
     print("지하철 게임입니다")
     subwayLine = ""
     if self.lastLoser != self.playerList[0]:
@@ -90,42 +90,42 @@ class drinkingGame():
         print("지하철 호선 목록: ", " ".join(subwayList))
         subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
       
-      idx = self.playerList.index(self.lastLoser)
-      wrongAnswer = False
-      answerList = []
-      correctSubway = self.stationDict[subwayLine]
-      if subwayLine != "2호선":
-        wrongSubway = self.stationDict["2호선"][:10]
+    idx = self.playerList.index(self.lastLoser)
+    wrongAnswer = False
+    answerList = []
+    correctSubway = self.stationDict[subwayLine]
+    if subwayLine != "2호선":
+      wrongSubway = self.stationDict["2호선"][:10]
+    else:
+      wrongSubway = self.stationDict["1호선"][:10]
+    computerSubway = correctSubway + wrongSubway
+    num = len(computerSubway)
+    
+
+    while not wrongAnswer:
+
+      if self.playerList[idx] == self.playerList[0]:
+        answer = input(f"{self.playerList[0]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: ")
+        answer =answer[:-1]
       else:
-        wrongSubway = self.stationDict["1호선"][:10]
-      computerSubway = correctSubway + wrongSubway
-      num = len(computerSubway)
+        answer = computerSubway[randint(0, num-1)]
+        print(f"{self.playerList[idx]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: {answer}역")
       
+      if answer not in correctSubway:
+        print(f"{self.playerList[idx]} 땡! {answer}는 {subwayLine}이 아닙니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
+        wrongAnswer = True
+        self.lastLoser = self.playerList[idx]
+        break
+      elif answer in answerList: #호선이 틀리거나 중복된 경우
+        print(f"{self.playerList[idx]} 땡! 이미 말한 역입니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
+        wrongAnswer = True
+        self.lastLoser = self.playerList[idx]
+        break
+      answerList.append(answer)
 
-      while not wrongAnswer:
-
-        if self.playerList[idx] == self.playerList[0]:
-          answer = input(f"{self.playerList[0]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: ")
-          answer =answer[:-1]
-        else:
-          answer = computerSubway[randint(0, num-1)]
-          print(f"{self.playerList[idx]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: {answer}역")
-        
-        if answer not in correctSubway:
-          print(f"{self.playerList[idx]} 땡! {answer}는 {subwayLine}이 아닙니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
-          wrongAnswer = True
-          self.lastLoser = self.playerList[idx]
-          break
-        elif answer in answerList: #호선이 틀리거나 중복된 경우
-          print(f"{self.playerList[idx]} 땡! 이미 말한 역입니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
-          wrongAnswer = True
-          self.lastLoser = self.playerList[idx]
-          break
-        answerList.append(answer)
-
-        idx += 1
-        if idx ==len(self.playerList):
-          idx = 0
+      idx += 1
+      if idx ==len(self.playerList):
+        idx = 0
   def recordGame(self) :
     from time import sleep
     import pandas as pd

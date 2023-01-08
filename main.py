@@ -118,7 +118,7 @@ while True:
     break
   drinkGame.selectGame(drinkGame.lastLoser)  #마지막으로 진 사람이 게임 선택
   drinkGame.changeStatus()       # 치사량 및 진 횟수 업데이트
-  print(drinkGame.playerLimit)   # 치사량 및 진 횟수 출력
+  # print(drinkGame.playerLimit)   # 치사량 및 진 횟수 출력
   if 0 in drinkGame.playerLimit: # 게임이 끝난 경우
     drinkGame.printGameOver()
     break
