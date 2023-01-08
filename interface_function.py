@@ -71,7 +71,71 @@ class drinkingGame():
     self.loseCount[idx] += 1
     
   def game1(self):
-    print("369 게임입니다")
+    import random
+    print("  ____ ___  ___   ___   ___  __ __  ___    ___  ___  ___  ___  ___  _ ")
+    print(" <__ /| __>| . | /  _> | . ||  \  \| __>  / __>|_ _|| . || . \|_ _|| | ")
+    print(" <_ \ | . \`_  / | <_/\|   ||     || _>   \__ \ | | |   ||   / | | |_/ ")
+    print(" <___/`___/ /_/  `____/|_|_||_|_|_||___>  <___/ |_| |_|_||_\_\ |_| <_> ")
+    print("")
+    print("369 게임입니다. 3, 6, 9가 들어간 개수만큼 박수 '짝'을 입력해 주세요. ex) 3일 때 '짝', 36일 때 '짝짝'")
+    print("")
+    count = 0
+    a = ['3', '6', '9']
+    num = len(self.playerList)
+    breaker = False
+    B = [True, True, True, False]
+    while True:
+      for i in range(num):
+        if i == 0:
+          count += 1
+          say = input(f'{self.playerList[0]}: ')
+          lam = (lambda x: sum([x.count(n) for n in a]))(str(count))
+          if lam:
+            answer = '짝' * lam
+            if say != answer:
+              print("")
+              print(f'아 누가누가 술을 마셔 {self.playerList[0]}이(가) 술을 마셔 원~~~샷!')
+              self.lastLoser = self.playerList[0]
+              breaker = True
+              break
+          else:
+            if count != int(say):
+              print("")
+              print(f'아 누가누가 술을 마셔 {self.playerList[0]}이(가) 술을 마셔 원~~~샷!') 
+              self.lastLoser = self.playerList[0]
+              breaker = True
+              break
+        else :
+          count += 1
+          reply = count
+          print(f'{self.playerList[i]}: ', end='')
+          lam = (lambda x: sum([x.count(n) for n in a]))(str(count))
+          if lam:
+            answer = '짝' * lam
+            b = random.randint(0, 3)
+            if B[b]:
+              reply = answer
+            print(reply)
+            if reply != answer:
+              print("")
+              print(f'아 누가누가 술을 마셔 {self.playerList[i]}이(가) 술을 마셔 원~~~샷!')
+              self.lastLoser = self.playerList[i] #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
+              breaker = True
+              break
+          else:
+            b = random.randint(2, 3)
+            if B[b]:
+              reply = count+1
+            print(reply)
+            if count != int(reply):
+              print("")
+              print(f'아 누가누가 술을 마셔 {self.playerList[i]}이(가) 술을 마셔 원~~~샷!') 
+              self.lastLoser = self.playerList[i] #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
+              breaker = True
+              break
+      if breaker == True :
+        break
+
   def game2(self):
     print("딸기 게임입니다")
   def game3(self):

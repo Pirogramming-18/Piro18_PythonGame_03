@@ -1,12 +1,10 @@
 import random
 from interface_function import drinkingGame, printGameList, printIntro, printSelectLimit
 
-
-
 playerList = []
 playerLimit = []
 
-friendList = ["유민", "건이", "다은", "서진", "태훈"]
+friendList = ["유민", "건", "다은", "서진", "태훈"]
 friendLimit = [2, 4, 6, 8, 10]
 
 # 인트로 출력
