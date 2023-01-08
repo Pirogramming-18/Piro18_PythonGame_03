@@ -83,7 +83,7 @@ class drinkingGame():
     a = ['3', '6', '9']
     num = len(self.playerList)
     breaker = False
-    B = [True, True, True, False]
+    B = [True, True, True, False, False, False]
     while True:
       for i in range(num):
         if i == 0:
@@ -123,7 +123,7 @@ class drinkingGame():
               breaker = True
               break
           else:
-            b = random.randint(2, 3)
+            b = random.randint(2, 5)
             if B[b]:
               reply = count+1
             print(reply)
