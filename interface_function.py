@@ -82,15 +82,20 @@ class drinkingGame():
     count = 0
     a = ['3', '6', '9']
     num = len(self.playerList)
+    #while과 for구문의 이중break를 도와주는 breaker를 사용
     breaker = False
+    #확률을 설정하도록 여러 bool이 담긴 리스트를 이용
     B = [True, True, True, False, False, False]
     while True:
       for i in range(num):
         if i == 0:
           count += 1
           say = input(f'{self.playerList[0]}: ')
+          #현재 숫자의 3, 6, 9 숫자의 합을 구하여 입력받은 say 속의 수와 같은지를 비교하는 람다함수
+          #해석하면, "str(count)를 x로 받아서 sum([x.count(n) for n in a])값을 반환하라"
           lam = (lambda x: sum([x.count(n) for n in a]))(str(count))
           if lam:
+            # 3, 6, 9가 중복되는 두 자리 숫자를 '짝짝'으로 처리 가능하도록 함
             answer = '짝' * lam
             if say != answer:
               print("")
@@ -99,6 +104,7 @@ class drinkingGame():
               breaker = True
               break
           else:
+            #ValueError를 막기위해 int(say)대신 str(count)로 설정
             if str(count) != say:
               print("")
               print(f'아 누가누가 술을 마셔 {self.playerList[0]}이(가) 술을 마셔 원~~~샷!') 
@@ -112,6 +118,7 @@ class drinkingGame():
           lam = (lambda x: sum([x.count(n) for n in a]))(str(count))
           if lam:
             answer = '짝' * lam
+            #'reply = answer'될 확률을 75%로 지정
             b = random.randint(0, 3)
             if B[b]:
               reply = answer
@@ -123,6 +130,7 @@ class drinkingGame():
               breaker = True
               break
           else:
+            #'reply = count+1'될 확률을 25%로 지정
             b = random.randint(2, 5)
             if B[b]:
               reply = count+1
