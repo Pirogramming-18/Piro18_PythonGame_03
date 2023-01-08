@@ -122,4 +122,4 @@ while True:
   if 0 in drinkGame.playerLimit: # 게임이 끝난 경우
     drinkGame.printGameOver()
     break
-    
+  
