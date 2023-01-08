@@ -106,7 +106,7 @@ drinkGame = drinkingGame(playerList, playerLimit, loseCount)
 drinkGame.printLimit()
 printGameList()
 drinkGame.selectGame(userName)
-
+drinkGame.changeStatus()
 
 while True:
 
