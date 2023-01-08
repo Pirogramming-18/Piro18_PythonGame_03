@@ -1,4 +1,4 @@
-from subwayGame import stationDict
+from subwayGame import stationDict, subwayList
 from random import randint
 # ----------------함수 설명-----------------
 # interface_function.py 구성 요소
@@ -32,6 +32,7 @@ class drinkingGame():
     self.playerLimit = playerLimit
     self.loseCount = loseCount
     self.userName = playerList[0]
+    self.lastLoser = playerList[0]
     
   #임시 게임
   def selectGame(self, name):
@@ -79,14 +80,14 @@ class drinkingGame():
     print("지하철 게임입니다")
     subwayLine = ""
     if self.lastLoser != self.playerList[0]:
-      idx = randint(0, len(self.subwayList)-1)
-      subwayLine = self.subwayList[idx]
+      idx = randint(0, len(subwayList)-1)
+      subwayLine = subwayList[idx]
       print(f"지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? {subwayLine}")
     else:
       subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
       while subwayLine not in self.stationDict:
         print("살리고~~~ 살리고~~~ 살리고~ 살리고~ 살리고~")
-        print("지하철 호선 목록: ", " ".join(self.subwayList))
+        print("지하철 호선 목록: ", " ".join(subwayList))
         subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
       
       idx = self.playerList.index(self.lastLoser)
