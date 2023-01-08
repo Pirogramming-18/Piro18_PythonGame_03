@@ -1,4 +1,4 @@
-
+# from subwayGame import subwayGame
 # ----------------함수 설명-----------------
 # interface_function.py 구성 요소
 # 1. drinkingGame 클래스 
@@ -18,7 +18,7 @@
 # printIntro()           (게임 인트로 출력)
 # printSelectLimit()     (주량 선택 인터페이스 출력)
 
-class drinkingGame:
+class drinkingGame():
   
   lastLoser = "태훈"  #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
   playerList = []
