@@ -99,7 +99,7 @@ class drinkingGame():
               breaker = True
               break
           else:
-            if count != int(say):
+            if str(count) != say:
               print("")
               print(f'아 누가누가 술을 마셔 {self.playerList[0]}이(가) 술을 마셔 원~~~샷!') 
               self.lastLoser = self.playerList[0]
@@ -119,7 +119,7 @@ class drinkingGame():
             if reply != answer:
               print("")
               print(f'아 누가누가 술을 마셔 {self.playerList[i]}이(가) 술을 마셔 원~~~샷!')
-              self.lastLoser = self.playerList[i] #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
+              self.lastLoser = self.playerList[i]
               breaker = True
               break
           else:
@@ -130,7 +130,7 @@ class drinkingGame():
             if count != int(reply):
               print("")
               print(f'아 누가누가 술을 마셔 {self.playerList[i]}이(가) 술을 마셔 원~~~샷!') 
-              self.lastLoser = self.playerList[i] #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
+              self.lastLoser = self.playerList[i]
               breaker = True
               break
       if breaker == True :
