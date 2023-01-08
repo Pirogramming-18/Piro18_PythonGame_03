@@ -24,10 +24,12 @@ class drinkingGame:
   playerList = []
   playerLimit = []
   loseCount = []
+  userName ="태훈"
   def __init__(self, playerList, playerLimit, loseCount):
     self.playerList = playerList
     self.playerLimit = playerLimit
     self.loseCount = loseCount
+    self.userName = playerList[0]
     
   #임시 게임
   def selectGame(self, name):
