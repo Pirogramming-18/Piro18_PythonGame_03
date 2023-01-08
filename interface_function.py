@@ -1,4 +1,5 @@
-
+from subwayGame import stationDict
+from random import randint
 # ----------------함수 설명-----------------
 # interface_function.py 구성 요소
 # 1. drinkingGame 클래스 
@@ -18,13 +19,14 @@
 # printIntro()           (게임 인트로 출력)
 # printSelectLimit()     (주량 선택 인터페이스 출력)
 
-class drinkingGame:
+class drinkingGame():
   
   lastLoser = "태훈"  #각 게임 구현에서 마지막으로 진 사람을 선택해줘야함
   playerList = []
   playerLimit = []
   loseCount = []
   userName ="태훈"
+  stationDict = stationDict
   def __init__(self, playerList, playerLimit, loseCount):
     self.playerList = playerList
     self.playerLimit = playerLimit
@@ -75,6 +77,54 @@ class drinkingGame:
     print("UP&DOWN 게임입니다")
   def game4(self):
     print("지하철 게임입니다")
+    subwayLine = ""
+    if self.lastLoser != self.playerList[0]:
+      idx = randint(0, len(self.subwayList)-1)
+      subwayLine = self.subwayList[idx]
+      print(f"지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? {subwayLine}")
+    else:
+      subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
+      while subwayLine not in self.stationDict:
+        print("살리고~~~ 살리고~~~ 살리고~ 살리고~ 살리고~")
+        print("지하철 호선 목록: ", " ".join(self.subwayList))
+        subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
+      
+      idx = self.playerList.index(self.lastLoser)
+      wrongAnswer = False
+      answerList = []
+      correctSubway = self.stationDict[subwayLine]
+      if subwayLine != "2호선":
+        wrongSubway = self.stationDict["2호선"][:10]
+      else:
+        wrongSubway = self.stationDict["1호선"][:10]
+      computerSubway = correctSubway + wrongSubway
+      num = len(computerSubway)
+      
+
+      while not wrongAnswer:
+
+        if self.playerList[idx] == self.playerList[0]:
+          answer = input(f"{self.playerList[0]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: ")
+          answer =answer[:-1]
+        else:
+          answer = computerSubway[randint(0, num-1)]
+          print(f"{self.playerList[idx]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: {answer}역")
+        
+        if answer not in correctSubway:
+          print(f"{self.playerList[idx]} 땡! {answer}는 {subwayLine}이 아닙니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
+          wrongAnswer = True
+          self.lastLoser = self.playerList[idx]
+          break
+        elif answer in answerList: #호선이 틀리거나 중복된 경우
+          print(f"{self.playerList[idx]} 땡! 이미 말한 역입니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
+          wrongAnswer = True
+          self.lastLoser = self.playerList[idx]
+          break
+        answerList.append(answer)
+
+        idx += 1
+        if idx ==len(self.playerList):
+          idx = 0
   def game5(self):
     print("레코드 게임입니다")
     
@@ -130,4 +180,4 @@ def printSelectLimit():
   print("                                                   🍾 4. 소주 한병 반에서 두 병 (8잔)                                                ")
   print("                                                   🍾 5. 소주 두병 이상 (10잔)                                                       ")
   print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  
+
