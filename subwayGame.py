@@ -1,5 +1,5 @@
 import requests
-from interface_function import drinkingGame
+# from interface_function import drinkingGame
 from bs4 import BeautifulSoup as bs
 from random import randint
 
@@ -61,8 +61,8 @@ stationDict["김포도시철도선"] = temp
 temp = [ele.select_one("station_nm").text for ele in stations if ele.select_one("line_num").text == "신림선"]
 stationDict["신림선"] = temp
 
-class subwayGame(drinkingGame):
-  
+'''class subwayGame(drinkingGame):
+# class subwayGame():
   subwayList = ["1호선","2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선", "인천1호선", "인천2호선", "수인분당선"\
     ,"신분당선", "경의중앙선", "공항철도선", "경춘선", "의정부경전철", "용인경전철", "경강선", "우이신설경전철", "서해선", "김포도시철도선", "신림선"]
   
@@ -96,7 +96,7 @@ class subwayGame(drinkingGame):
       
 
       while not wrongAnswer:
-        # for i in range(len(playerList)):
+
         if playerList[idx] == playerList[0]:
           answer = input(f"{playerList[0]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: ")
           answer =answer[:-1]
@@ -121,4 +121,4 @@ class subwayGame(drinkingGame):
           idx = 0
         
 sub = subwayGame(playerList, playerLimit, loseCount, stationDict)
-sub.subwayGameStart()
+sub.subwayGameStart()'''
