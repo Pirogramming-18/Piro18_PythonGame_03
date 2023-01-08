@@ -43,7 +43,7 @@ def recordGame() :
             computerDataList[i][j] = computerDataList[i][j].replace(" ", "")
             computerDataList[i][j] = computerDataList[i][j].lower()
             computerDataList[i][j] = computerDataList[i][j][1:-1]
-
+    
     #['블랙핑크', '르세라핌', '뉴진스', '아이브', '데이식스'] 랜덤으로 접근
     round = random.randint(0,4)
 
@@ -83,8 +83,12 @@ def recordGame() :
             overlapList.append(userAnswer)
 
         #컴퓨터
-        computerPick = random.randint(0,11)    
-        coumputerAnswer = computerData[computerPick] 
+        try:
+            computerPick = random.randint(1,12)    
+            coumputerAnswer = computerData[computerPick-1] 
+        except IndexError as e:
+            computerPick = random.randint(1,12)    
+            coumputerAnswer = computerData[computerPick-1] 
         print('🖥  컴퓨터가 | {} | 를 말했습니다!\n'.format(coumputerAnswer))
         if coumputerAnswer not in answerList[round]:
             print("❌ {}의 노래제목이 아닙니다! \n누가 술을 마셔~🍺 컴퓨터가 술을 마셔!🍻 \n".format(roundSinger))
