@@ -76,10 +76,12 @@ class drinkingGame():
       self.playerLimit[idx] -= 1
       self.loseCount[idx] += 1
     else:
-      for i in range(len(self.playerLimit)):
-        if i != idx:
-          self.playerLimit[i] -= 1
-          self.loseCount[i] += 1
+      for i in range(len(self.lastLoser)):
+            idx = self.playerList.index(self.lastLoser[i])
+            self.playerLimit[idx] -= 1
+            self.loseCount[idx] += 1
+      self.lastLoser = self.lastLoser[0]
+    
     
   #369 게임(1번게임)
   def game1(self):
