@@ -1,6 +1,7 @@
 from subwayGame import stationDict, subwayList
 import random
-
+from time import sleep
+import pandas as pd
 # ----------------함수 설명-----------------
 # interface_function.py 구성 요소
 # 1. drinkingGame 클래스 
@@ -30,6 +31,7 @@ class drinkingGame():
   loseCount = []
   userName =""
   stationDict = stationDict #지하철 노선 저장한 딕셔너리
+  isUpDownGame = False #up down 게임은 이긴 사람 빼고 벌주 마셔야하므로 다르게 처리
   
   def __init__(self, playerList, playerLimit, loseCount):
     self.playerList = playerList
@@ -37,7 +39,6 @@ class drinkingGame():
     self.loseCount = loseCount
     self.userName = playerList[0]
     self.lastLoser = playerList[0]
-    
   #임시 게임
   def selectGame(self, name):
     correctNumber = False
@@ -71,12 +72,18 @@ class drinkingGame():
   # 각 게임에서 진 사람을 클래스의 변수인 lastLoser에 넣으면 그 다음에 자동으로 남은 치사량과 진 횟수를 업데이트
   def changeStatus(self):
     idx = self.playerList.index(self.lastLoser)
-    self.playerLimit[idx] -= 1
-    self.loseCount[idx] += 1
+    if not self.isUpDownGame:
+      self.playerLimit[idx] -= 1
+      self.loseCount[idx] += 1
+    else:
+      for i in range(len(self.playerLimit)):
+        if i != idx:
+          self.playerLimit[i] -= 1
+          self.loseCount[i] += 1
     
   #369 게임(1번게임)
   def game1(self):
-
+    self.isUpDownGame = False
     print("  ____ ___  ___   ___   ___  __ __  ___    ___  ___  ___  ___  ___  _ ")
     print(" <__ /| __>| . | /  _> | . ||  \  \| __>  / __>|_ _|| . || . \|_ _|| | ")
     print(" <_ \ | . \`_  / | <_/\|   ||     || _>   \__ \ | | |   ||   / | | |_/ ")
@@ -152,13 +159,16 @@ class drinkingGame():
   #딸기 게임(2번 게임)
   def game2(self):
     print("딸기 게임입니다")
+    self.isUpDownGame = False
   
   #UP&DOWN 게임(3번 게임)
   def game3(self):
     print("UP&DOWN 게임입니다")
+    self.isUpDownGame = True
     
   #지하철 게임(4번 게임)
   def subwayGame(self):
+    self.isUpDownGame = False
     #INPUT으로 받을 지하철 노선
     subwayLine = ""
     
@@ -226,10 +236,8 @@ class drinkingGame():
         
   #레코드 게임(5번 게임)
   def recordGame(self) :
-    from time import sleep
-    import pandas as pd
-    import random
 
+    self.isUpDownGame = False
     #---------------------------------------------csv파일 읽어오기----------------------------------------------
     data = pd.read_csv('./recordGame/recordGameData.csv') #경로 나중 변경
     data = data[['singer', 'song']]
