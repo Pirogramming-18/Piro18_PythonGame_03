@@ -14,15 +14,13 @@ class StrawBerry():
                     for i in range(0,len(self.player_list)):
                             print(f"🍓이번 차례는 {self.player_list[i]} !",end="\n")          
                             cnt = randint(num,num+1)
-                                                
-                        
                             
                             player = ("딸기"+" ") * cnt
                             print(player,end="\n\n")
-                                
+                            
                             # if(cnt // 4 == 1):
                             #     player 
-                                
+                            
                             if(player.count('딸기') != num):
                                 print("마셔 마셔!")
                                 print(f"{self.player_list[i]}아 원샷해라.")

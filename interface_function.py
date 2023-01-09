@@ -162,38 +162,33 @@ class drinkingGame():
   def game2(self):
     print("딸기 게임입니다")
     self.isUpDownGame = False
-    print("   ___    _                     ___                  ")   
-    print("/ __> _| |_  _ _  ___  _ _ _ | . > ___  _ _  _ _  _ _") 
-    print("\__ \  | |  | '_><_> || | | || . \/ ._>| '_>| '_>| | |")
-    print("<___/  |_|  |_|  <___||__/_/ |___/\___.|_|  |_|  `_. |")
-    print("                                                 <___'")
 
 
     print("🍓🍓🍓🍓🍓 딸기가 좋아 🍓 딸기가 좋아 🍓 좋아 좋아 좋아 좋아 좋아 좋아 🍓🍓🍓🍓",end="\n\n") 
-    num = 1 #정답인 딸기 횟수
+    num = 1
     while(1):
                 try:
-                    for i in range(0,len(self.playerList)): #플레이어 순서는 차례대로
-                            print(f"🍓이번 차례는 {self.playerList[i]} !",end="\n")     
-                            #cnt는 딸기 부를 횟수, 딸기 횟수 맞출 확률은 50%      
+                    for i in range(0,len(self.player_list)):
+                            print(f"🍓이번 차례는 {self.player_list[i]} !",end="\n")          
                             cnt = random.randint(num,num+1)
                                                 
                         
-                            #cnt만큼 딸기 출력
+                            
                             player = ("딸기"+" ") * cnt
                             print(player,end="\n\n")
                                 
-                         
-                            #딸기 횟수가 정답이랑 틀리면 탈락!
+                            # if(cnt // 4 == 1):
+                            #     player 
+                                
                             if(player.count('딸기') != num):
                                 print("마셔 마셔!")
-                                print(f"{self.playerList[i]}아 원샷해라.")
-                                loser = self.playerList[i]
+                                print(f"{self.player_list[i]}아 원샷해라.")
+                                loser = self.player_list[i]
                                 #패배자 
                                 self.lastLoser = loser
                                 print("패배자 : ",self.lastLoser)
                                 raise Exception
-                            num += 1 #정답일 시 다음에 말해야되는 딸기 횟수 증가
+                            num += 1
                     
                 except:             
                         break
@@ -202,18 +197,17 @@ class drinkingGame():
   def game3(self):
     print("UP&DOWN 게임입니다")
     self.isUpDownGame = True
-    print (""" _ _         _                  
-          | | | ___  _| | ___  _ _ _ ._ _ 
-          | ' || . \/ . |/ . \| | | || ' |
-          `___'|  _/\___|\___/|__/_/ |_|_|
-               |_|                        
-    """)
+    print (" _ _         _                  ") 
+    print ("| | | ___  _| | ___  _ _ _ ._ _ ")
+    print ("| ' || . \/ . |/ . \| | | || ' |")
+    print ("`___'|  _/\___|\___/|__/_/ |_|_|")
+    print ("     |_|                        ")
 
-    print (""" ___                     ___    _                _    _  _  _ 
-              /  _>  ___ ._ _ _  ___  / __> _| |_  ___  _ _  _| |_ | || || |
-              | <_/\<_> || ' ' |/ ._> \__ \  | |  <_> || '_>  | |  |_/|_/|_/
-              `____/<___||_|_|_|\___. <___/  |_|  <___||_|    |_|  <_><_><_>
-    """)
+
+    print (" ___                    ___    _                _    _  _  _ ")
+    print ("/  _>  ___ ._ _ _  ___ / __> _| |_  ___  _ _  _| |_ | || || |")
+    print ("| <_/\<_> || ' ' |/ ._>\__ \  | |  <_> || '_>  | |  |_/|_/|_/")
+    print ("`____/<___||_|_|_|\___.<___/  |_|  <___||_|    |_|  <_><_><_>")
     print ("게임을 시작합니다! 숫자를 맞춰주세요!")
     up = 100
     down = 1
@@ -255,23 +249,11 @@ class drinkingGame():
                         print ("땡 ~ UP!!!")
                         down = guess + 1
                 else:
-                    print ("""
-                             ___                                        _  _  _ 
-                            /  _>  ___ ._ _ _  ___  ___  _ _  ___  _ _ | || || |
-                            | <_/\<_> || ' ' |/ ._>/ . \| | |/ ._>| '_>|_/|_/|_/
-                            `____/<___||_|_|_|\___.\___/|__/ \___.|_|  <_><_><_>
-                           """)
                     print ("🍻 정답!! 문제를 낸 사람이 벌주를 마십니다! 🍻")
                     self.lastLoser = [self.lastLoser]
                     break
                     
                 if tries == n:
-                    print ("""
-                             ___                                        _  _  _ 
-                            /  _>  ___ ._ _ _  ___  ___  _ _  ___  _ _ | || || |
-                            | <_/\<_> || ' ' |/ ._>/ . \| | |/ ._>| '_>|_/|_/|_/
-                            `____/<___||_|_|_|\___.\___/|__/ \___.|_|  <_><_><_>
-                           """)
                     print ("정답은 {0}이었습니다!".format(number))
                     print ("🍻 기회를 다 썼습니다!! 못맞추신 분들 벌주 마시세요~~~ 🍻")
                     self.lastLoser = self.playerList[1:]
@@ -414,11 +396,6 @@ class drinkingGame():
         answerList[round][i] = answerList[round][i][1:-1]
 
     #---------------------------------------------------게임 시작---------------------------------------------------
-    print(" ___  ___  ___  ___  ___  ___   ___   ___  __ __  ___ ")
-    print("| . \| __>|  _>| . || . \| . \ /  _> | . ||  \  \| __>")
-    print("|   /| _> | <__| | ||   /| | | | <_/\|   ||     || _> ")
-    print("|_\_\|___>`___/`___'|_\_\|___/ `____/|_|_||_|_|_||___>")   
-    print('\n')                                             
     print("💿 레코드 레코드 잉잉잉! 레코드 레코드 잉잉잉! 💿\n")
     print('💗 {}💗의 노래 제목을 말해주세요!👯 다른 가수의 노래를 말하거나 중복되면 그대 눈동자에 cheers..⭐️\n\n'.format(roundSinger))
 
