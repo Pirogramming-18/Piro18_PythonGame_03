@@ -173,7 +173,7 @@ class drinkingGame():
     num = 1
     while(1):
                 try:
-                    for i in range(0,len(self.playerList[i])):
+                    for i in range(0,len(self.playerList)):
                             print(f"🍓이번 차례는 {self.playerList[i]} !",end="\n")          
                             cnt = random.randint(num,num+1)
                                                 
