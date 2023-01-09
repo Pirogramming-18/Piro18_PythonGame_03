@@ -170,21 +170,21 @@ class drinkingGame():
 
 
     print("🍓🍓🍓🍓🍓 딸기가 좋아 🍓 딸기가 좋아 🍓 좋아 좋아 좋아 좋아 좋아 좋아 🍓🍓🍓🍓",end="\n\n") 
-    num = 1
+    num = 1 #정답인 딸기 횟수
     while(1):
                 try:
-                    for i in range(0,len(self.playerList)):
-                            print(f"🍓이번 차례는 {self.playerList[i]} !",end="\n")          
+                    for i in range(0,len(self.playerList)): #플레이어 순서는 차례대로
+                            print(f"🍓이번 차례는 {self.playerList[i]} !",end="\n")     
+                            #cnt는 딸기 부를 횟수, 딸기 횟수 맞출 확률은 50%      
                             cnt = random.randint(num,num+1)
                                                 
                         
-                            
+                            #cnt만큼 딸기 출력
                             player = ("딸기"+" ") * cnt
                             print(player,end="\n\n")
                                 
-                            # if(cnt // 4 == 1):
-                            #     player 
-                                
+                         
+                            #딸기 횟수가 정답이랑 틀리면 탈락!
                             if(player.count('딸기') != num):
                                 print("마셔 마셔!")
                                 print(f"{self.playerList[i]}아 원샷해라.")
@@ -193,7 +193,7 @@ class drinkingGame():
                                 self.lastLoser = loser
                                 print("패배자 : ",self.lastLoser)
                                 raise Exception
-                            num += 1
+                            num += 1 #정답일 시 다음에 말해야되는 딸기 횟수 증가
                     
                 except:             
                         break
