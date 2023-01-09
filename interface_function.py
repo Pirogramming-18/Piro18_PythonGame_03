@@ -173,8 +173,8 @@ class drinkingGame():
     num = 1
     while(1):
                 try:
-                    for i in range(0,len(self.player_list)):
-                            print(f"🍓이번 차례는 {self.player_list[i]} !",end="\n")          
+                    for i in range(0,len(self.player_List)):
+                            print(f"🍓이번 차례는 {self.player_List[i]} !",end="\n")          
                             cnt = random.randint(num,num+1)
                                                 
                         
@@ -187,8 +187,8 @@ class drinkingGame():
                                 
                             if(player.count('딸기') != num):
                                 print("마셔 마셔!")
-                                print(f"{self.player_list[i]}아 원샷해라.")
-                                loser = self.player_list[i]
+                                print(f"{self.player_List[i]}아 원샷해라.")
+                                loser = self.player_List[i]
                                 #패배자 
                                 self.lastLoser = loser
                                 print("패배자 : ",self.lastLoser)
