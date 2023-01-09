@@ -1,5 +1,6 @@
 from subwayGame import stationDict, subwayList
-from random import randint
+import random
+
 # ----------------함수 설명-----------------
 # interface_function.py 구성 요소
 # 1. drinkingGame 클래스 
@@ -8,6 +9,8 @@ from random import randint
 #      2. playerList     (게임에 참가하는 플레이어들의 이름 리스트)
 #      3. playerLimit    (각 게임에 참가하는 플레이어들의 치사량 리스트 순서는 위의 이름 리스트 순서대로)
 #      4. loseCount      (게임 끝날 때마다 진 횟수 출력해야해서 추가. 플레이어들의 진 횟수. 순서는 위와 동일)
+#      5. userName       (사용자 이름 따로 저장)
+#      6. stationDict    (지하철게임 때 쓰기 위한 노선 딕셔너리)
 #  - 함수
 #      1. selectGame     (마지막에 진 사람이 게임을 선택하게 함 input으로 받는 숫자에 따라 게임 결정)
 #      2. printLimit     (각 플레이어마다 진 횟수와 남은 치사량 출력)
@@ -26,7 +29,8 @@ class drinkingGame():
   playerLimit = []
   loseCount = []
   userName =""
-  stationDict = stationDict
+  stationDict = stationDict #지하철 노선 저장한 딕셔너리
+  
   def __init__(self, playerList, playerLimit, loseCount):
     self.playerList = playerList
     self.playerLimit = playerLimit
@@ -70,8 +74,9 @@ class drinkingGame():
     self.playerLimit[idx] -= 1
     self.loseCount[idx] += 1
     
+  #369 게임(1번게임)
   def game1(self):
-    import random
+
     print("  ____ ___  ___   ___   ___  __ __  ___    ___  ___  ___  ___  ___  _ ")
     print(" <__ /| __>| . | /  _> | . ||  \  \| __>  / __>|_ _|| . || . \|_ _|| | ")
     print(" <_ \ | . \`_  / | <_/\|   ||     || _>   \__ \ | | |   ||   / | | |_/ ")
@@ -144,17 +149,22 @@ class drinkingGame():
       if breaker == True :
         break
 
+  #딸기 게임(2번 게임)
   def game2(self):
     print("딸기 게임입니다")
+  
+  #UP&DOWN 게임(3번 게임)
   def game3(self):
     print("UP&DOWN 게임입니다")
+    
+  #지하철 게임(4번 게임)
   def subwayGame(self):
-    # print("지하철 게임입니다")
+    #INPUT으로 받을 지하철 노선
     subwayLine = ""
     
     #컴퓨터 차례
     if self.lastLoser != self.playerList[0]:
-      idx = randint(0, len(subwayList)-1)
+      idx = random.randint(0, len(subwayList)-1)
       subwayLine = subwayList[idx]
       print(f"지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? {subwayLine}")
     
@@ -189,7 +199,7 @@ class drinkingGame():
         
       #컴퓨터 차례
       else:
-        answer = computerSubway[randint(0, num-1)]
+        answer = computerSubway[random.randint(0, num-1)]
         print(f"{self.playerList[idx]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: {answer}역")
       
       #잘못된 노선 말한 경우
@@ -213,6 +223,8 @@ class drinkingGame():
       idx += 1
       if idx ==len(self.playerList):
         idx = 0
+        
+  #레코드 게임(5번 게임)
   def recordGame(self) :
     from time import sleep
     import pandas as pd
