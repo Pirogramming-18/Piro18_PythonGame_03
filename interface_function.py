@@ -71,8 +71,8 @@ class drinkingGame():
   
   # 각 게임에서 진 사람을 클래스의 변수인 lastLoser에 넣으면 그 다음에 자동으로 남은 치사량과 진 횟수를 업데이트
   def changeStatus(self):
-    idx = self.playerList.index(self.lastLoser)
     if not self.isUpDownGame:
+      idx = self.playerList.index(self.lastLoser)
       self.playerLimit[idx] -= 1
       self.loseCount[idx] += 1
     else:
@@ -182,7 +182,7 @@ class drinkingGame():
     print ("게임을 시작합니다! 숫자를 맞춰주세요!")
     up = 100
     down = 1
-    index = self.playerList.index(lastLoser)
+    index = self.playerList.index(self.lastLoser)
     if index == 0:
         while True:
             number = int(input("당신이 낸 숫자를 친구들이 맞춥니다! 숫자를 입력해주세요🤪 : "))
@@ -199,7 +199,7 @@ class drinkingGame():
     while tries < n: #시도횟수가 8번이 될때까지 반복
         try:
             player = self.playerList[index] # index번째
-            if player == lastLoser:
+            if player == self.lastLoser:
                 index += 1                
                 if index == len(self.playerList):
                     index = 0
@@ -227,8 +227,9 @@ class drinkingGame():
                             `____/<___||_|_|_|\___.\___/|__/ \___.|_|  <_><_><_>
                            """)
                     print ("🍻 정답!! 문제를 낸 사람이 벌주를 마십니다! 🍻")
-                    return lastLoser
-            
+                    self.lastLoser = [self.lastLoser]
+                    break
+                    
                 if tries == n:
                     print ("""
                              ___                                        _  _  _ 
@@ -238,9 +239,9 @@ class drinkingGame():
                            """)
                     print ("정답은 {0}이었습니다!".format(number))
                     print ("🍻 기회를 다 썼습니다!! 못맞추신 분들 벌주 마시세요~~~ 🍻")
-                    lastLoser = self.playerList[1:]
-                    return lastLoser
-            
+                    self.lastLoser = self.playerList[1:]
+                    break
+                  
                 index += 1                
                 if index == len(self.playerList):
                     index = 0
