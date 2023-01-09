@@ -1,10 +1,11 @@
 # Piro18_PythonGame_03
 
-### 파이썬을 이용한 술게임
+### ପ(੭◍ ´ᵕ`◍)੭ 3조 Python 술게임
 
-1. 369 게임
-2. 딸기 게임
-3. UP&DOWN 게임
-4. 지하철 게임
-5. 레코드 게임
-
+|TEAM MEMBER|PART|CRAWLING|
+|------|---|:---:|
+|고건|UP&DOWN GAME|
+|김유민|딸기 GAME|
+|한다은|369 GAME|
+|이태훈(팀장)|Interface / Main / 지하철 GAME| ✔️
+|윤서진|RECORD GAME| ✔️
