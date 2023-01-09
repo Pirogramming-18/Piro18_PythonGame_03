@@ -149,23 +149,29 @@ class drinkingGame():
   def game3(self):
     print("UP&DOWN 게임입니다")
   def subwayGame(self):
-    print("지하철 게임입니다")
+    # print("지하철 게임입니다")
     subwayLine = ""
+    
+    #컴퓨터 차례
     if self.lastLoser != self.playerList[0]:
       idx = randint(0, len(subwayList)-1)
       subwayLine = subwayList[idx]
       print(f"지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? {subwayLine}")
+    
+    #유저 차례
     else:
       subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
       while subwayLine not in self.stationDict:
         print("살리고~~~ 살리고~~~ 살리고~ 살리고~ 살리고~")
         print("지하철 호선 목록: ", " ".join(subwayList))
         subwayLine = input("지하철~🚇 지하철~🚇 지하철~🚇 지하철~🚇 몇호선~? : ")
-      
-    idx = self.playerList.index(self.lastLoser)
-    wrongAnswer = False
-    answerList = []
+
+    wrongAnswer = False # 답이 맞는지 체크하기 위한 플래그
+    answerList = [] #중복 체크하기 위함
+    idx = self.playerList.index(self.lastLoser) #처음 시작하는 사람 인덱스
     correctSubway = self.stationDict[subwayLine]
+    
+    #컴퓨터의 대답에 오답도 추가하여 확률적으로 대답하게 함
     if subwayLine != "2호선":
       wrongSubway = self.stationDict["2호선"][:10]
     else:
@@ -173,28 +179,37 @@ class drinkingGame():
     computerSubway = correctSubway + wrongSubway
     num = len(computerSubway)
     
-
+    #게임 시작
     while not wrongAnswer:
-
+      
+      #유저 차례
       if self.playerList[idx] == self.playerList[0]:
         answer = input(f"{self.playerList[0]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: ")
         answer =answer[:-1]
+        
+      #컴퓨터 차례
       else:
         answer = computerSubway[randint(0, num-1)]
         print(f"{self.playerList[idx]}의 차례입니다. {subwayLine}의 역을 하나 말해주세요: {answer}역")
       
+      #잘못된 노선 말한 경우
       if answer not in correctSubway:
         print(f"{self.playerList[idx]} 땡! {answer}는 {subwayLine}이 아닙니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
         wrongAnswer = True
         self.lastLoser = self.playerList[idx]
         break
+      
+      #중복된 노선 말한 경우
       elif answer in answerList: #호선이 틀리거나 중복된 경우
         print(f"{self.playerList[idx]} 땡! 이미 말한 역입니다. 마셔~ 마셔~ 먹고 뒤져~🍾")
         wrongAnswer = True
         self.lastLoser = self.playerList[idx]
         break
+      
+      #중복 체크하기 위해 리스트에 말한 대답 추가
       answerList.append(answer)
 
+      #유저 번갈아가면서 하기 위해 인덱스 바꾸기
       idx += 1
       if idx ==len(self.playerList):
         idx = 0
